@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/weather
+    username: postgres
+    password: postgres
+  liquibase:
+    change-log: classpath:db/master.xml
+  data:
+    redis:
+      host: localhost
+      port: 16379
+      password:
+ip-api:
+  url: http://ip-api.com/
+open-meteo:
+  url: https://api.open-meteo.com/v1/
+cache:
+  expire:
+    weather: 1d
+    location: 1000d
+server:
+  tomcat:
+    threads:
+      max: 100
+    connection-timeout: 1000

@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.4'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.zachmj'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
+    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.3.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.postgresql:postgresql:42.5.4'
+    implementation 'org.hibernate:hibernate-validator:6.0.16.Final'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2'
+}
+
+
+var preview = '--enable-preview'
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += preview
+}
+
+tasks.withType(Test).configureEach {
+    jvmArgs += preview
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs += preview
+}
+tasks.named('test') {
+    useJUnitPlatform()
+}
